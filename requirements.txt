@@ -1,0 +1,14 @@
+mir_eval>=0.7
+musdb>=0.4
+stempeg>=0.2
+librosa>=0.10
+soundfile
+numpy
+scipy
+pandas
+requests
+boto3
+python-dotenv
+pyyaml
+tabulate
+museval

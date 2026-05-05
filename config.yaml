@@ -1,0 +1,42 @@
+# Benchmark configuration
+# All settings here are overridable via environment variables or CLI flags.
+
+dataset:
+  path: data/musdb18          # Local path to the MUSDB18 archive
+  split: test                 # "test" (50 tracks) or "train" (100 tracks)
+  max_tracks: 50              # Set to a smaller number (e.g. 10) for a fast dry-run
+  sample_rate: 44100          # Native MUSDB18 rate — do not change without resampling
+
+stems:
+  # Canonical stem names used throughout the pipeline.
+  # Each separator client maps its own output names to these keys.
+  - vocals
+  - drums
+  - bass
+  - other
+
+separators:
+  fadr:
+    enabled: true
+    poll_interval_s: 5        # Seconds between status poll requests
+    timeout_s: 600            # Max wait per track before marking as failed
+    stem_map:                 # Fadr output name → canonical stem name
+      Vocals: vocals
+      Drums: drums
+      Bass: bass
+      Melodies: other
+
+storage:
+  # Cloud bucket used to host audio files for API input.
+  # Fadr requires a URL — direct binary upload is not supported.
+  provider: s3                # "s3" or "gcs"
+  bucket: ""                  # Set via STORAGE_BUCKET env var or fill in here
+  presigned_url_ttl_s: 3600   # How long upload/download URLs stay valid
+
+evaluation:
+  metrics:
+    - sdr
+    - sir
+    - sar
+  # bss_eval compute mode: "sources" (standard) or "images" (multichannel)
+  bss_eval_mode: sources

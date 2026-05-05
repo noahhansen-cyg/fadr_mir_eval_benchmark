@@ -1,0 +1,23 @@
+# Secrets
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Data (large files — store outside the repo or in DVC)
+data/musdb18/
+data/separated/
+data/manifest.csv
+data/separation_log.csv
+
+# Results
+results/
+
+# macOS
+.DS_Store
